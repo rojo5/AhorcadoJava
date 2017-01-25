@@ -56,6 +56,36 @@ public class VentanaAhorcado extends javax.swing.JFrame {
       panelAhorcado.setIcon(miImagen);
        
     }
+    
+            
+    private void chequeaLetra(String letra){
+        letra = letra.toUpperCase();
+        StringBuilder palabrasConGuiones =  new StringBuilder(pantalla.getText());
+        
+        //contains pregunta si el caracter pasado por el usuario esta en la palabraOculta
+        if(palabraOculta.contains(letra)){
+            for(int i=0;i< palabraOculta.length();i++){
+                if(palabraOculta.charAt(i) == letra.charAt(0)){
+                  palabrasConGuiones.setCharAt(2*i, letra.charAt(0));
+                }
+            }
+            pantalla.setText(palabrasConGuiones.toString());
+        }
+        else{       
+        numeroFallos++;
+        dibujaImagen(numeroFallos);
+        }
+
+    }
+    
+    private void chequeaBoton(JButton miBoton){
+        miBoton.setEnabled(false);
+        chequeaLetra(miBoton.getText());
+    }
+    
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -418,34 +448,7 @@ public class VentanaAhorcado extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-        
-    private void chequeaLetra(String letra){
-        letra = letra.toUpperCase();
-        StringBuilder palabrasConGuiones =  new StringBuilder(pantalla.getText());
-        
-        //contains pregunta si el caracter pasado por el usuario esta en la palabraOculta
-        if(palabraOculta.contains(letra)){
-            for(int i=0;i< palabraOculta.length();i++){
-                if(palabraOculta.charAt(i) == letra.charAt(0)){
-                  palabrasConGuiones.setCharAt(2*i, letra.charAt(0));
-                }
-            }
-            pantalla.setText(palabrasConGuiones.toString());
-        }
-        else{       
-        numeroFallos++;
-        dibujaImagen(numeroFallos);
-        }
 
-    }
-    
-    private void chequeaBoton(JButton miBoton){
-        miBoton.setEnabled(false);
-        chequeaLetra(miBoton.getText());
-    }
-    
-    
-    
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
         chequeaBoton((JButton) evt.getSource());
     }//GEN-LAST:event_jButton1MousePressed
